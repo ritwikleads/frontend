@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useState } from "react";
 import {
   ArrowLeft,
@@ -21,6 +23,7 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import GoogleMap from "./GoogleMap";
 
 type PanelSpecs = {
   capacity: string
@@ -77,9 +80,12 @@ type CalculationResult = {
 interface SolarResultsPageProps {
   calculationResult: CalculationResult
   onBackToForm: () => void
+  address: string
+  latitude: number
+  longitude: number
 }
 
-const SolarResultsPage = ({ calculationResult, onBackToForm }: SolarResultsPageProps) => {
+const SolarResultsPage = ({ calculationResult, onBackToForm, address, latitude, longitude }: SolarResultsPageProps) => {
   // Destructure the calculation result for easier access
   const {
     solarPotentialSummary,
@@ -120,6 +126,11 @@ const SolarResultsPage = ({ calculationResult, onBackToForm }: SolarResultsPageP
             </Button>
             <Sun className="h-6 w-6 md:h-8 md:w-8 text-green-500 mr-2 md:mr-3" />
             <h1 className="text-xl md:text-2xl font-bold text-gray-800">Your Solar Savings</h1>
+          </div>
+
+          {/* Add Google Map */}
+          <div className="mb-6">
+            <GoogleMap latitude={latitude} longitude={longitude} address={address} />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6 mb-4 md:mb-6">

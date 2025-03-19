@@ -456,6 +456,9 @@ export default function SolarCalculatorForm() {
       <SolarResultsPage 
         calculationResult={calculationResult}
         onBackToForm={() => setShowResults(false)}
+        address={formData.address}
+        latitude={formData.latitude || 0}
+        longitude={formData.longitude || 0}
       />
     )
   }
