@@ -22,9 +22,14 @@ const GoogleMap = ({ latitude, longitude, address }: GoogleMapProps) => {
         center: { lat: latitude, lng: longitude },
         zoom: 20,
         mapTypeId: 'satellite',
-        mapTypeControl: true,
+        mapTypeControl: false,
         streetViewControl: false,
         fullscreenControl: false,
+        zoomControl: false,
+        scaleControl: false,
+        rotateControl: false,
+        panControl: false,
+        disableDefaultUI: true,
         tilt: 45,
       }
 
