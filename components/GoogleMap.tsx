@@ -20,10 +20,12 @@ const GoogleMap = ({ latitude, longitude, address }: GoogleMapProps) => {
     const initMap = () => {
       const mapOptions: google.maps.MapOptions = {
         center: { lat: latitude, lng: longitude },
-        zoom: 15,
-        mapTypeControl: false,
+        zoom: 20,
+        mapTypeId: 'satellite',
+        mapTypeControl: true,
         streetViewControl: false,
         fullscreenControl: false,
+        tilt: 45,
       }
 
       // Create the map instance
@@ -39,15 +41,22 @@ const GoogleMap = ({ latitude, longitude, address }: GoogleMapProps) => {
       })
       markerRef.current = marker
 
-      // Create an info window
+      // Create an info window with styled content
       const infoWindow = new google.maps.InfoWindow({
-        content: `<div style="padding: 8px;">${address}</div>`,
+        content: `
+          <div style="padding: 12px; font-family: Arial, sans-serif;">
+            <strong style="font-size: 14px; color: #333;">${address}</strong>
+          </div>
+        `,
       })
 
       // Add click listener to marker
       marker.addListener("click", () => {
         infoWindow.open(map, marker)
       })
+
+      // Open info window by default
+      infoWindow.open(map, marker)
     }
 
     initMap()
@@ -62,7 +71,7 @@ const GoogleMap = ({ latitude, longitude, address }: GoogleMapProps) => {
   }, [latitude, longitude, address])
 
   return (
-    <div className="w-full h-[300px] rounded-lg overflow-hidden shadow-md">
+    <div className="w-full h-[400px] rounded-lg overflow-hidden shadow-md">
       <div ref={mapRef} style={{ width: '100%', height: '100%' }} />
     </div>
   )
